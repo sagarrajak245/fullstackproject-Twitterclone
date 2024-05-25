@@ -10,7 +10,7 @@ console.log(`MongoDB connected: ${connect.connection.host}`);
 }
 
 catch(err){
-    console.error(`Error to connection: ${err.message}`);
+    console.error(`Error to connection: ${err.message}`);  
 process.exit(1);
 
 }
