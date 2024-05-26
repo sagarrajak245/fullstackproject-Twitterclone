@@ -144,7 +144,7 @@ export const updateUserProfile=async (req,res)=>{
     const{fullname,email,username,currentPassword,newPassword,bio,link}=req.body;
     let {profileImg,coverImg}=req.body;
 
-    const userId=req.user._id;
+    const userId=req.user._id; 
 
 
 
