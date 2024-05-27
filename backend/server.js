@@ -4,7 +4,10 @@ import dotenv from 'dotenv';
 import express, { urlencoded } from 'express';
 import connectMongoDB from './db/connectmongodb.js';
 import authRoutes from './routes/authroutes.js';
+import notificationRoutes from './routes/notificationroutes.js';
+import postRoutes from './routes/postroutes.js';
 import userRoutes from './routes/userroutes.js';
+
 
 
 
@@ -41,6 +44,8 @@ app.use(urlencoded({extended:true})); // to parse the incoming request with urle
  app.use(cookieParser());
 app.use("/api/auth",authRoutes); 
 app.use("/api/users", userRoutes);   
+app.use('/api/posts', postRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 
 

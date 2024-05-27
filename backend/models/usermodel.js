@@ -32,11 +32,11 @@ following:[{type:mongoose.Schema.Types.ObjectId,ref:"User",
     default:[],
 }],
 
-profilePicture:{
+profileImg:{
 type:String,
 default:" ",
 },
-coverPicture:{
+coverImg:{
 type:String,
 default:" ",
 },
@@ -49,7 +49,17 @@ link:{
 type:String,
 default:" ",
 },
-},{timestamps:true}
+likedPosts:[{  
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Post",
+  
+   
+
+}],
+
+
+
+},{timestamps:true}  
 
 );
 

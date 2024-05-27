@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { v2 as cloudinary } from 'cloudinary';
   
 
-//models
+
 import Notification from '../models/notificationmodel.js';
 import User from '../models/usermodel.js';
 
