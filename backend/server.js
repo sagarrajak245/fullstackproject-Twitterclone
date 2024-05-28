@@ -33,7 +33,7 @@ api_secret:process.env.CLOUDINARY_API_SECRET,
 
 const app =express(); 
 
-const port=process.env.PORT || 5000;   
+const port=process.env.PORT || 5001;   
   
 
 app.use(express.json());// to parse the incoming request with JSON payloads
