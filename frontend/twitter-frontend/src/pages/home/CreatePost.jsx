@@ -11,7 +11,7 @@ const CreatePost = () => {
 
 	const imgRef = useRef(null);
 
-	// const isPending = false;
+
 
 
 	const {data:authuser  } = useQuery({ queryKey: ["authUser"] });
@@ -36,7 +36,7 @@ return data;
 }
 
 catch(error){
-	throw new Error(error.message);}
+	throw new Error(error.message);}  
 
 	
 },onSuccess:()=>{
