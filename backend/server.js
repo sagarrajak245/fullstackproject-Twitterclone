@@ -33,7 +33,7 @@ api_secret:process.env.CLOUDINARY_API_SECRET,
 
 const app =express(); 
 
-const port=process.env.PORT || 5001;   
+const port=process.env.PORT || 5001;       
   
 
 app.use(express.json());// to parse the incoming request with JSON payloads
@@ -43,9 +43,9 @@ app.use(urlencoded({extended:true})); // to parse the incoming request with urle
  // to parse the incoming request with cookie payloads
  app.use(cookieParser());
 app.use("/api/auth",authRoutes); 
-app.use("/api/users", userRoutes);   
+app.use("/api/users", userRoutes);     
 app.use('/api/posts', postRoutes);
-app.use('/api/notifications', notificationRoutes);
+app.use('/api/notifications', notificationRoutes);      
 
 
 

@@ -11,8 +11,15 @@ import { FaLink } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoCalendarOutline } from "react-icons/io5";
 import { MdEdit } from "react-icons/md";
+// import { useQuery } from "@tanstack/react-query";
 
 const ProfilePage = () => {
+
+
+//   const  data =useQuery({querykey:["authUser"]});
+
+
+
 	const [coverImg, setCoverImg] = useState(null);
 	const [profileImg, setProfileImg] = useState(null);
 	const [feedType, setFeedType] = useState("posts");
@@ -21,7 +28,7 @@ const ProfilePage = () => {
 	const profileImgRef = useRef(null);
 
 	const isLoading = false;
-	const isMyProfile = true;
+	const isMyProfile = true;   
 
 	const user = {
 		_id: "1",
@@ -30,7 +37,7 @@ const ProfilePage = () => {
 		profileImg: "/avatars/boy2.png",
 		coverImg: "/cover.png",
 		bio: "Tenacious.....",
-		link: "_https://portfolio-1-rho-one.vercel.app/", 
+		link: "_https://portfolio-1-rho-one.vercel.app",  
 		following: ["1", "2", "3"],
 		followers: ["1", "2", "3"],
 	};

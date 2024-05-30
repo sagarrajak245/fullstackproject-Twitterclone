@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 
 import XSvg from "../../components/svg/X.jsx";
 
+import toast from "react-hot-toast";
 import { MdOutlineMail, MdPassword } from "react-icons/md";
 
+
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 
 
@@ -15,10 +19,60 @@ username: "",
 password: "",
 
 });
+// {username, password}
+const queryClient = useQueryClient();
+
+
+  const {mutate,isError, isLoading, error} = useMutation ({
+mutationFn: async ({username, password}) => {
+	try{
+
+const res = await fetch("/api/auth/login",{
+method:"POST",
+headers:{"Content-Type":"application/json"},  
+body:JSON.stringify({username,password})
+});
+
+
+const data= await res.json();
+
+if(!res.ok) throw new Error("error occured during fetching data in res block "|| data.message);
+console.log(data); 
+return data;
+
+
+
+	}
+	
+
+
+	catch(error){
+		console.log(error);
+                toast.error(error.message);
+                throw error; // Re-throw the error to ensure isError is set correctly
+            }
+
+	},
+
+	onSuccess: () => {
+toast.success("Login successful");
+queryClient.invalidateQueries({ queryKey: ["authUser"] });
+
+
+	},
+
+
+
+  });
+
+
+
+
+
 
 const handleSubmit = (e) => {
 e.preventDefault();
-console.log(formData);
+mutate(formData);// login mutation is called with the form data
 
 };
 
@@ -28,7 +82,7 @@ setFormData({...formData, [e.target.name]: e.target.value});
 }
 
 
-const isError = false;
+
 
 
 
@@ -61,12 +115,14 @@ const isError = false;
 							className='grow'
 							placeholder='Password'
 							name='password'
-							onChange={handleInputChange}
+							onChange={handleInputChange} 
 							value={formData.password}
 						/>
 					</label>
-					<button className='btn rounded-full btn-primary text-white'>Login</button>
-					{isError && <p className='text-red-500'>Something went wrong</p>}
+					<button className='btn rounded-full btn-primary text-white'>
+					{isLoading ? "Loading..." : "Login"}
+					</button>
+					{isError && <p className='text-red-500'>{error.message}</p>}
 				</form>
 				<div className='flex flex-col gap-2 mt-4'>
 					<p className='text-white text-lg'>{"Don't"} have an account?</p>
@@ -81,4 +137,4 @@ const isError = false;
   )
 }
 
-export default LoginPage;
+export default LoginPage;  

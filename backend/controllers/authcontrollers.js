@@ -3,9 +3,19 @@ import { generateTokenandSetCookie } from '../lib/utils/generateToken.js';
 import User from '../models/usermodel.js';
 
 
-export const signup = async (req, res) => {
+export const signup = async (req, res) => { 
     try {
         const { username, fullname, password, email } = req.body;
+
+//debugging logs
+// console.log("username",username);
+// console.log("fullname",fullname);
+// console.log("password",password);
+// console.log("email",email);
+
+
+
+
 
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -76,6 +86,10 @@ export const login = async (req, res) => {
     try{
 
         const {username,password} = req.body;
+// console.log("username",username); debug logs
+// console.log("password",password);
+
+
         const user= await User.findOne({username});
         const validPassword = await bcrypt.compare(password,user?.password||" ");
 
