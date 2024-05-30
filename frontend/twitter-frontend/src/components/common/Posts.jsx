@@ -77,7 +77,7 @@ refetch();
 				<div className='flex flex-col justify-center'>
 					<PostSkeleton />
 					<PostSkeleton />
-					<PostSkeleton />  
+					<PostSkeleton />    
 				</div>
 			)}
 			{!isLoading &&!isRefetching && posts?.length === 0 &&

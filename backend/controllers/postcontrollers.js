@@ -12,8 +12,8 @@ export const createPost = async (req, res) => {
     let { img } = req.body;
     const userId = req.user._id.toString();
 
-    // console.log('Request body:', req.body); debug logs
-    // console.log('User ID:', userId);
+    console.log('Request body:', req.body); 
+    console.log('User ID:', userId);
 
     const user = await User.findById(userId);
 

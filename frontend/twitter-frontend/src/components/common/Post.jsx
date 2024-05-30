@@ -1,21 +1,65 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { data } from "autoprefixer";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { BiRepost } from "react-icons/bi";
 import { FaRegComment, FaRegHeart, FaTrash } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Post = ({ post }) => { 
+
+const queryClient=useQueryClient();
+
+
 	const [comment, setComment] = useState("");
+
+const {data:authUser}=useQuery({queryKey:["authUser"]});
+const {mutate:deletePost,isPending}=useMutation({
+mutationFn:async ()=>{
+try{
+const res=await fetch(`/api/posts/${post._id}`,{
+method:"DELETE",
+});
+if(!res.ok) throw new Error("error occured during fetching data in res block");
+const data=await res.json();
+return data;
+
+
+
+}
+
+
+catch(e){
+	throw new Error(data.message || "Failed to delete post");
+
+}
+
+},
+onSuccess:()=>{
+toast.success("Post deleted successfully");
+queryClient.invalidateQueries({queryKey:["posts"]});
+
+}
+
+
+
+
+});
+
 	const postOwner = post.user;
 	const isLiked = false;
 
-	const isMyPost = true;
+	const isMyPost = authUser._id===post.user._id;
 
 	const formattedDate = "1h";
 
 	const isCommenting = false;
 
-	const handleDeletePost = () => {};
+	const handleDeletePost =async () => {
+		deletePost();
+};
 
 	const handlePostComment = (e) => {
 		e.preventDefault();
@@ -43,7 +87,10 @@ const Post = ({ post }) => {
 						</span>
 						{isMyPost && (
 							<span className='flex justify-end flex-1'>
-								<FaTrash className='cursor-pointer hover:text-red-500' onClick={handleDeletePost} />
+								<FaTrash className='cursor-pointer hover:text-red-600' onClick= {handleDeletePost} />
+								{isPending && ( 
+									<LoadingSpinner size='sm' />
+									)}
 							</span>
 						)}
 					</div>
@@ -72,7 +119,7 @@ const Post = ({ post }) => {
 							<dialog id={`comments_modal${post._id}`} className='modal border-none outline-none'>
 								<div className='modal-box rounded border border-gray-600'>
 									<h3 className='font-bold text-lg mb-4'>COMMENTS</h3>
-									<div className='flex flex-col gap-3 max-h-60 overflow-auto'>
+									<div className='flex flex-col gap-3 max-h-60 overflow-auto'>  
 										{post.comments.length === 0 && (
 											<p className='text-sm text-slate-500'>
 												No comments yet 🤔 Be the first one 😉
