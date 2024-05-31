@@ -42,10 +42,10 @@ app.use(express.json({ limit: "5mb" }));// to parse the incoming request with JS
 app.use(urlencoded({extended:true})); // to parse the incoming request with urlencoded payloads
  // to parse the incoming request with cookie payloads
  app.use(cookieParser());
-app.use("/api/auth",authRoutes); 
-app.use("/api/users", userRoutes);       
+app.use("/api/auth",authRoutes);  
+app.use("/api/users", userRoutes);         
 app.use('/api/posts', postRoutes);
-app.use('/api/notifications', notificationRoutes);      
+app.use('/api/notifications', notificationRoutes);         
 
 
 

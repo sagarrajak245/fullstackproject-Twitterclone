@@ -122,6 +122,12 @@ await post.save();
 res.status(200).json(post);
 }
 
+//update comments in cache
+
+
+
+
+
 
 catch(err){
     console.error('Error in comment on post:', err.message);  
@@ -156,9 +162,9 @@ export const likeUnlikePost = async (req, res) => {
       await Post.updateOne({_id:postId}, { $pull: { likes: userId } });
       await User.updateOne({_id:userId}, { $pull: { likedPosts: postId }});
       
-      
+      const updatedLikes= post.likes.filter((id)=>id.toString()!==userId.toString());
       return res.status(200).json({
-        message: "Post unliked successfully",
+      updatedLikes
       });
     } else {
      await  post.likes.push(userId);
@@ -172,9 +178,11 @@ export const likeUnlikePost = async (req, res) => {
         read: false,
       });
       await notification.save();
-      return res.status(200).json({
-        message: "Post liked successfully",    
-      });
+const updatedLikes=post.likes;
+
+      return res.status(200).json(
+          updatedLikes
+      );
     }
   } catch (err) {
     console.error('Error in like unlike post:', err.message);
