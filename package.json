@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon backend/server.js",
-    "start": "node backend/server.js"
+    "dev": "NODE_ENV=development nodemon backend/server.js",
+    "start": "NODE_ENV=production node backend/server.js",
+    "build":"cd frontend/twitter-frontend && npm install && npm run build" 
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.2.0",
-    "cookie-parser": "^1.4.6",
+    "cookie-parser": "^1.4.6",  
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

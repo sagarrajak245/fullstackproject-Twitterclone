@@ -2,6 +2,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import express, { urlencoded } from 'express';
+import path from 'path';
 import connectMongoDB from './db/connectmongodb.js';
 import authRoutes from './routes/authroutes.js';
 import notificationRoutes from './routes/notificationroutes.js';
@@ -33,6 +34,8 @@ api_secret:process.env.CLOUDINARY_API_SECRET,
 
 const app =express();     
 
+const __dirname = path.resolve();
+
 const port=process.env.PORT || 5001;             
   
 
@@ -47,13 +50,18 @@ app.use("/api/users", userRoutes);
 app.use('/api/posts', postRoutes); 
 app.use('/api/notifications', notificationRoutes);         
 
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname,'/frontend/twitter-frontend/dist')));
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'frontend','twitter-frontend','dist','index.html'));    
+    }
+    );
+}
 
-
-
-console.log(process.env.MONGO_URI); 
+console.log(process.env.MONGO_URI);     
 
  app.listen(port,()=>{
     console.log(`Server running on port ${port}`)   
     connectMongoDB();
 }
-);
+); 
