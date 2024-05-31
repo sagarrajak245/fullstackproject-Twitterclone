@@ -48,7 +48,7 @@ app.use(urlencoded({extended:true})); // to parse the incoming request with urle
 app.use("/api/auth",authRoutes);    
 app.use("/api/users", userRoutes);         
 app.use('/api/posts', postRoutes); 
-app.use('/api/notifications', notificationRoutes);         
+app.use('/api/notifications', notificationRoutes);            
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname,'/frontend/twitter-frontend/dist')));
