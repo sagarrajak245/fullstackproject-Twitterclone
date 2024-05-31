@@ -44,7 +44,7 @@ app.use(urlencoded({extended:true})); // to parse the incoming request with urle
  app.use(cookieParser());
 app.use("/api/auth",authRoutes);  
 app.use("/api/users", userRoutes);         
-app.use('/api/posts', postRoutes);
+app.use('/api/posts', postRoutes); 
 app.use('/api/notifications', notificationRoutes);         
 
 
