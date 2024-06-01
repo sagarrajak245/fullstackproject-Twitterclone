@@ -36,8 +36,8 @@ const app =express();
 
 const __dirname = path.resolve();
 
-const port=process.env.PORT || 5001;             
-  
+const port=process.env.PORT || 5001;              
+   
 
 app.use(express.json({ limit: "5mb" }));// to parse the incoming request with JSON payloads
 
