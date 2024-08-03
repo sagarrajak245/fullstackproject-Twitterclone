@@ -86,7 +86,7 @@ export const login = async (req, res) => {
     try{
 
         const {username,password} = req.body;
-// console.log("username",username); debug logs
+// console.log("username",username); 
 // console.log("password",password);
 
 
@@ -169,31 +169,23 @@ catch(err){
 
 
 
-// // This is the getMe function manually without middelware
-// export const getMe = async (req, res) => {
-//   const { username, password } = req.body;
 
-//   try {
-//     // Find the user by username
-//     const user = await User.findOne({ username });
 
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
-   
-//     // Compare the provided password with the stored hashed password
-//     const isMatch = await bcrypt.compare(password, user.password);
 
-//     if (!isMatch) {
-//       return res.status(401).json({ error: 'Invalid credentials' });
-//     }
 
-//     // Exclude the password field from the response
-//     const { password: userPassword, ...userWithoutPassword } = user.toObject();
 
-//     res.status(200).json(userWithoutPassword);
-//   } catch (err) {
-//     console.error('Error in getMe', err.message);
-//     res.status(500).json({ error: 'Something went wrong in getMe' });
-//   }
-// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
