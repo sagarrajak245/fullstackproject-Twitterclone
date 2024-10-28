@@ -23,4 +23,5 @@ router.get('/user/:username',protectRoute,getUserPosts);
 
 
 
+
 export default router;

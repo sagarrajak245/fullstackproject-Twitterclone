@@ -56,12 +56,21 @@ likedPosts:[{
    
 
 }],
+bookmarkedPosts:[{  
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Post", 
+  
+   
 
-
+}],
 
 },{timestamps:true}  
 
 );
+
+
+
+
 
 
 const user  = mongoose.model("User",userSchema);

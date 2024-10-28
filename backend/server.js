@@ -26,16 +26,16 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename); 
 
-const port = process.env.PORT || 5000;              
+const port = process.env.PORT || 5003;             
 
 app.use(express.json({ limit: "5mb" })); // to parse the incoming request with JSON payloads
 app.use(urlencoded({ extended: true })); // to parse the incoming request with urlencoded payloads
 app.use(cookieParser()); // to parse the incoming request with cookie payloads
 
 app.use("/api/auth", authRoutes);    
-app.use("/api/users", userRoutes);         
+app.use("/api/users", userRoutes);            
 app.use('/api/posts', postRoutes); 
-app.use('/api/notifications', notificationRoutes);            
+app.use('/api/notifications', notificationRoutes);              
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/twitter-frontend/dist')));
