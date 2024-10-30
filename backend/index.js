@@ -18,6 +18,10 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,   
 });
 
+
+
+
+
 const app = express();     
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename); 
