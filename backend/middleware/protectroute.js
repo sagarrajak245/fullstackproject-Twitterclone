@@ -6,7 +6,7 @@ import User from '../models/usermodel.js';
 export const protectRoute = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
-    // console.log('Token:', token);
+    //  console.log('Token:', token);
     if (!token) {
       return res.status(401).json({ error: 'Unauthorized: No Token Provided' });
     }
@@ -20,7 +20,7 @@ export const protectRoute = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ error: 'User not found sagar' });
     }
-
+ 
     req.user = user;
     next();
   } catch (err) {

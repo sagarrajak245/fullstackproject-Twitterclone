@@ -2,23 +2,16 @@ import bcrypt from 'bcryptjs';
 import { generateTokenandSetCookie } from '../lib/utils/generateToken.js';
 import User from '../models/usermodel.js';
 
-
 export const signup = async (req, res) => { 
     try {
         const { username, fullname, password, email } = req.body;
 
-//debugging logs
-// console.log("username",username);
-// console.log("fullname",fullname);
-// console.log("password",password);
-// console.log("email",email);
-
-
-
-
-
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // console.log("Email:", email);
+
+
         if (!emailRegex.test(email)) {
             return res.status(400).json({ message: "Invalid email format" });
         }
@@ -82,50 +75,39 @@ export const signup = async (req, res) => {
 
 
 export const login = async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
-    try{
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(400).json({ message: "Invalid username or password" });
+        }
 
-        const {username,password} = req.body;
-// console.log("username",username); 
-// console.log("password",password);
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+            return res.status(400).json({ message: "Invalid username or password" });
+        }
 
+        generateTokenandSetCookie(user._id, res);   
 
-        const user= await User.findOne({username});
-        const validPassword = await bcrypt.compare(password,user?.password||" ");
-
-     if(!user || !validPassword){
-        return res.status(400).json({
-            message:"Invalid user name or password",
-        });}
-
-generateTokenandSetCookie(user._id,res);  
-
-res.status(200).json({
-    _id:user._id,
-    username:user.username,
-    fullname:user.fullname,
-    email:user.email,
-    followers:user.followers,
-    following:user.following,
-    profilePicture:user.profilePicture,  
-    coverPicture:user.coverPicture,
-    bio:user.bio,
-    link:user.link,
-});
-
-    }
-    
-    
-    
-    
-    catch(err){
-        console.error("error in login ",err.message);
-        res.status(500).json({
-            message:"Something went wrong in login",
+        res.status(200).json({
+            _id: user._id,
+            username: user.username,
+            fullname: user.fullname,
+            email: user.email,
+            followers: user.followers,
+            following: user.following,
+            profilePicture: user.profilePicture,  
+            coverPicture: user.coverPicture,
+            bio: user.bio,
+            link: user.link,
         });
-    
+    } catch (err) {
+        console.error("Error in login:", err.message);
+        res.status(500).json({
+            message: "Something went wrong in login",
+        });
     }
-    
 };
 
 
