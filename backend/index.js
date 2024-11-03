@@ -5,7 +5,7 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import connectMongoDB from './db/connectmongodb.js';
 import authRoutes from './routes/authroutes.js';
-import notificationRoutes from './routes/notificationroutes.js';  
+import notificationRoutes from './routes/notificationroutes.js';
 import postRoutes from './routes/postroutes.js';
 import userRoutes from './routes/userroutes.js';
 
