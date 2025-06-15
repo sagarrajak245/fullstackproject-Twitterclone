@@ -9,40 +9,40 @@ import { MdHomeFilled } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-	
-	const queryClient = useQueryClient(); 
 
-    const {mutate }=useMutation({
+	const queryClient = useQueryClient();
 
-mutationFn: async () => {
-try{
-const res=await fetch("/api/auth/logout",{
-method:"POST",
-})
-const data = await res.json();
-if(!res.ok) throw new Error("error occured during fetching data in res block "|| data.message);
+	const { mutate } = useMutation({
+
+		mutationFn: async () => {
+			try {
+				const res = await fetch("/api/auth/logout", {
+					method: "POST",
+				})
+				const data = await res.json();
+				if (!res.ok) throw new Error("error occured during fetching data in res block " || data.message);
 
 
-}
+			}
 
-catch(error){
-	throw new Error(error.message);
+			catch (error) {
+				throw new Error(error.message);
 
-}
+			}
 
-}, 
-onSuccess:()=>{
-	toast.success("Logout successful");
-	queryClient.invalidateQueries({queryKey:["authUser"]});
+		},
+		onSuccess: () => {
+			toast.success("Logout successful");
+			queryClient.invalidateQueries({ queryKey: ["authUser"] });
 
-}
+		}
 
 	});
 
 
 
 
-const {data:authUser} =useQuery({queryKey:["authUser"]});
+	const { data: authUser } = useQuery({ queryKey: ["authUser"] });
 
 
 
@@ -55,7 +55,7 @@ const {data:authUser} =useQuery({queryKey:["authUser"]});
 			<div className='sticky   top-0 left-0 h-screen flex flex-col border-r
              border-gray-700 w-20 md:w-full'>
 
-                
+
 				<Link to='/' className='flex justify-center md:justify-start'>
 					<XSvg className='px-2 lg:pl-1 mt-1 mr-1 w-12 h-12 rounded-full fill-white
                      hover:bg-stone-900' />
@@ -69,7 +69,7 @@ const {data:authUser} =useQuery({queryKey:["authUser"]});
                              max-w-fit cursor-pointer'
 						>
 							<MdHomeFilled className='w-8 h-8' />
-							<span className='text-lg hidden md:block '>Home</span>
+							<span className='text-lg hidden md:block text-white '>Home</span>
 						</Link>
 					</li>
 					<li className='flex justify-center md:justify-start'>
@@ -80,7 +80,7 @@ const {data:authUser} =useQuery({queryKey:["authUser"]});
                             max-w-fit cursor-pointer'
 						>
 							<IoNotifications className='w-6 h-6' />
-							<span className='text-lg hidden md:block'>Notifications</span>
+							<span className='text-lg hidden md:block text-white'>Notifications</span>
 						</Link>
 					</li>
 
@@ -92,7 +92,7 @@ const {data:authUser} =useQuery({queryKey:["authUser"]});
                             max-w-fit cursor-pointer'
 						>
 							<FaUser className='w-6 h-6' />
-							<span className='text-lg hidden md:block'>Profile</span>
+							<span className='text-lg hidden md:block text-white'>Profile</span>
 						</Link>
 					</li>
 				</ul>
@@ -118,10 +118,10 @@ const {data:authUser} =useQuery({queryKey:["authUser"]});
 
 							</div>
 							<BiLogOut className='w-5 h-5 cursor-pointer'
-							onClick={(e)=>{
-								e.preventDefault();
-								mutate();
-							}}
+								onClick={(e) => {
+									e.preventDefault();
+									mutate();
+								}}
 							/>
 						</div>
 					</Link>
