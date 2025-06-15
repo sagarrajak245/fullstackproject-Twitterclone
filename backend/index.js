@@ -4,10 +4,10 @@ import express, { urlencoded } from 'express';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import connectMongoDB from './db/connectmongodb.js';
-
-import notificationRoutes from './routes/notificationroutes.js';
-import postRoutes from './routes/postroutes.js';
-import userRoutes from './routes/userroutes.js';
+import authRoutes from './routes/authRoutes.js';
+import notificationRoutes from './routes/notificationRoutes.js';
+import postRoutes from './routes/postRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 
