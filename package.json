@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon backend/index.js",
     "start": "NODE_ENV=production node backend/index.js",
-    "build": "cd frontend/twitter-frontend && npm install && npm run build"
+    "build": "cd frontend/twitter-frontend && npm install --include=dev && npm run build"
   },
   "keywords": [],
   "author": "",
